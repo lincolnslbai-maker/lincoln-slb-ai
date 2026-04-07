@@ -2,103 +2,104 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>ECOSSISTEMA LINCOLN SLB - AI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ECOSSISTEMA LINCOLN SLB AI</title>
+
 <style>
 body {
-    margin:0;
-    font-family: Arial;
-    background:#0a1f3c;
-    color:#d4af37;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0a1f3c;
+  color: #d4af37;
+  text-align: center;
 }
+
 header {
-    padding:20px;
-    text-align:center;
-    font-size:28px;
-    font-weight:bold;
+  padding: 20px;
+  background: #081633;
 }
-nav {
-    display:flex;
-    justify-content:center;
-    gap:15px;
-    padding:10px;
+
+nav a {
+  margin: 0 15px;
+  color: #d4af37;
+  text-decoration: none;
+  font-weight: bold;
 }
-button {
-    background:#d4af37;
-    color:#0a1f3c;
-    border:none;
-    padding:10px 15px;
-    cursor:pointer;
-    font-weight:bold;
-}
+
 section {
-    padding:40px;
-    text-align:center;
+  padding: 60px 20px;
 }
-</style>
+
 .botao {
   display: inline-block;
-  margin-top: 20px;
-  padding: 15px 25px;
+  margin-top: 25px;
+  padding: 15px 30px;
   background-color: gold;
   color: black;
   text-decoration: none;
   font-weight: bold;
   border-radius: 8px;
 }
-    
+
+input {
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+footer {
+  padding: 20px;
+  background: #081633;
+  margin-top: 40px;
+}
+</style>
+
 </head>
 
 <body>
 
-<header>ECOSSISTEMA LINCOLN SLB - AI</header>
-
-<nav>
-<button onclick="mostrar('home')">Início</button>
-<button onclick="mostrar('quem')">Quem Somos</button>
-<button onclick="mostrar('homenagem')">Homenagem</button>
-<button onclick="mostrar('ias')">IAs</button>
-<button onclick="mostrar('contato')">Fale Conosco</button>
-</nav>
+<header>
+  <h1>ECOSSISTEMA LINCOLN SLB AI</h1>
+  <nav>
+    <a href="#home">Início</a>
+    <a href="#sobre">Sobre</a>
+    <a href="#ecossistema">Ecossistema</a>
+    <a href="#contato">Contato</a>
+  </nav>
+</header>
 
 <section id="home">
-<h2>LEGADO NÃO MORRE. EVOLUI.</h2>
-<p>Quem é bom nunca morre. Vive em cada semente plantada.</p>
-</section>
-
-<section>
-<h2>LEGADO NÃO MORRE. EVOLUI.</h2>
-<p>Quem é bom nunca morre...</p>
+  <h2>LEGADO NÃO MORRE. ELE SE MULTIPLICA.</h2>
+  <p>Quem constrói valor permanece em tudo que impactou.</p>
 
   <a href="#ecossistema" class="botao">ACESSAR ECOSSISTEMA</a>
-
 </section>
 
-<section id="quem" style="display:none;">
-<h2>Quem Sou</h2>
-<p>Lamarck Leitão - Corretor, empresário e construtor de legado.</p>
+<section id="sobre">
+  <h2>O QUE É O PROJETO</h2>
+  <p>Um ecossistema digital baseado em inteligência artificial, educação e construção de legado. Criado para impactar pessoas e gerar transformação real.</p>
 </section>
 
-<section id="homenagem" style="display:none;">
-<h2>Lincoln SLB</h2>
-<p>Um homem íntegro. Justiça. Verdade. Legado eterno.</p>
+<section id="ecossistema">
+  <h2>ECOSSISTEMA LINCOLN SLB AI</h2>
+  <p>Área estratégica com conteúdos, IAs, treinamentos e oportunidades de crescimento.</p>
+
+  <a href="https://wa.me/5583999999999" class="botao">ENTRAR AGORA</a>
 </section>
 
-<section id="ias" style="display:none;">
-<h2>Top IAs</h2>
-<p>Em breve: as 300 melhores IAs do mundo.</p>
+<section id="contato">
+  <h2>FAÇA PARTE</h2>
+
+  <input type="text" placeholder="Seu nome"><br>
+  <input type="text" placeholder="Seu WhatsApp"><br>
+
+  <a href="https://wa.me/5583999999999" class="botao">QUERO FAZER PARTE</a>
 </section>
 
-<section id="contato" style="display:none;">
-<h2>Fale Conosco</h2>
-<p>Email: lincolnslbai@gmail.com</p>
-</section>
-
-<script>
-function mostrar(secao){
-    document.querySelectorAll("section").forEach(s=>s.style.display="none");
-    document.getElementById(secao).style.display="block";
-}
-</script>
+<footer>
+  <p>© 2026 LINCOLN SLB AI - Todos os direitos reservados</p>
+</footer>
 
 </body>
 </html>
