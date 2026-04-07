@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>ECOSSISTEMA LINCOLN SLB - AI</title>
+<style>
+body {
+    margin:0;
+    font-family: Arial;
+    background:#0a1f3c;
+    color:#d4af37;
+}
+header {
+    padding:20px;
+    text-align:center;
+    font-size:28px;
+    font-weight:bold;
+}
+nav {
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    padding:10px;
+}
+button {
+    background:#d4af37;
+    color:#0a1f3c;
+    border:none;
+    padding:10px 15px;
+    cursor:pointer;
+    font-weight:bold;
+}
+section {
+    padding:40px;
+    text-align:center;
+}
+</style>
+</head>
+
+<body>
+
+<header>ECOSSISTEMA LINCOLN SLB - AI</header>
+
+<nav>
+<button onclick="mostrar('home')">Início</button>
+<button onclick="mostrar('quem')">Quem Somos</button>
+<button onclick="mostrar('homenagem')">Homenagem</button>
+<button onclick="mostrar('ias')">IAs</button>
+<button onclick="mostrar('contato')">Fale Conosco</button>
+</nav>
+
+<section id="home">
+<h2>LEGADO NÃO MORRE. EVOLUI.</h2>
+<p>Quem é bom nunca morre. Vive em cada semente plantada.</p>
+</section>
+
+<section id="quem" style="display:none;">
+<h2>Quem Sou</h2>
+<p>Lamarck Leitão - Corretor, empresário e construtor de legado.</p>
+</section>
+
+<section id="homenagem" style="display:none;">
+<h2>Lincoln SLB</h2>
+<p>Um homem íntegro. Justiça. Verdade. Legado eterno.</p>
+</section>
+
+<section id="ias" style="display:none;">
+<h2>Top IAs</h2>
+<p>Em breve: as 300 melhores IAs do mundo.</p>
+</section>
+
+<section id="contato" style="display:none;">
+<h2>Fale Conosco</h2>
+<p>Email: lincolnslbai@gmail.com</p>
+</section>
+
+<script>
+function mostrar(secao){
+    document.querySelectorAll("section").forEach(s=>s.style.display="none");
+    document.getElementById(secao).style.display="block";
+}
+</script>
+
+</body>
+</html>
