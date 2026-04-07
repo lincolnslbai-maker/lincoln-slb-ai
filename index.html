@@ -3,103 +3,185 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ECOSSISTEMA LINCOLN SLB AI</title>
+<title>LINCOLN SLB AI</title>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #0a1f3c;
-  color: #d4af37;
-  text-align: center;
-}
-
-header {
-  padding: 20px;
-  background: #081633;
-}
-
-nav a {
-  margin: 0 15px;
-  color: #d4af37;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-section {
-  padding: 60px 20px;
-}
-
-.botao {
-  display: inline-block;
-  margin-top: 25px;
-  padding: 15px 30px;
-  background-color: gold;
-  color: black;
-  text-decoration: none;
-  font-weight: bold;
-  border-radius: 8px;
-}
-
-input {
-  padding: 10px;
-  margin: 10px;
-  border-radius: 5px;
-  border: none;
-}
-
-footer {
-  padding: 20px;
-  background: #081633;
-  margin-top: 40px;
-}
+body { margin:0; font-family:Arial; background:#020617; color:#fff; }
+.hidden { display:none; }
+.container { max-width:400px; margin:auto; padding:20px; }
+.card { background:#0f172a; padding:15px; margin:10px 0; border-radius:10px; }
+input, button { width:100%; padding:10px; margin:5px 0; border-radius:5px; border:none; }
+button { background:#22c55e; font-weight:bold; }
+nav { position:fixed; bottom:0; width:100%; display:flex; justify-content:space-around; background:#020617; }
 </style>
-
 </head>
 
 <body>
 
-<header>
-  <h1>ECOSSISTEMA LINCOLN SLB AI</h1>
-  <nav>
-    <a href="#home">Início</a>
-    <a href="#sobre">Sobre</a>
-    <a href="#ecossistema">Ecossistema</a>
-    <a href="#contato">Contato</a>
-  </nav>
-</header>
+<!-- LOGIN -->
+<div id="login" class="container">
+  <h2>🔐 Login</h2>
+  <input id="email" placeholder="Email">
+  <input id="senha" type="password" placeholder="Senha">
+  <button onclick="login()">Entrar</button>
+  <button onclick="cadastrar()">Criar Conta</button>
+</div>
 
-<section id="home">
-  <h2>LEGADO NÃO MORRE. ELE SE MULTIPLICA.</h2>
-  <p>Quem constrói valor permanece em tudo que impactou.</p>
+<!-- PAINEL -->
+<div id="painel" class="container hidden">
+  <h2>📊 Painel</h2>
 
-  <a href="#ecossistema" class="botao">ACESSAR ECOSSISTEMA</a>
-</section>
+  <div class="card">Leads: <span id="totalLeads">0</span></div>
 
-<section id="sobre">
-  <h2>O QUE É O PROJETO</h2>
-  <p>Um ecossistema digital baseado em inteligência artificial, educação e construção de legado. Criado para impactar pessoas e gerar transformação real.</p>
-</section>
+  <button onclick="abrirCaptura()">Novo Lead</button>
+</div>
 
-<section id="ecossistema">
-  <h2>ECOSSISTEMA LINCOLN SLB AI</h2>
-  <p>Área estratégica com conteúdos, IAs, treinamentos e oportunidades de crescimento.</p>
+<!-- CAPTURA -->
+<div id="captura" class="container hidden">
+  <h2>🔥 Novo Lead</h2>
+  <input id="nome" placeholder="Nome">
+  <input id="telefone" placeholder="WhatsApp">
+  <input id="emailLead" placeholder="Email">
+  <button onclick="salvarLead()">Salvar</button>
+</div>
 
-  <a href="https://wa.me/5583996235442" class="botao">ENTRAR AGORA</a>
-</section>
+<!-- CRM -->
+<div id="crm" class="container hidden">
+  <h2>📋 CRM</h2>
+  <div id="lista"></div>
+</div>
 
-<section id="contato">
-  <h2>FAÇA PARTE</h2>
+<nav class="hidden" id="menu">
+  <button onclick="mostrarPainel()">🏠</button>
+  <button onclick="mostrarCRM()">📋</button>
+  <button onclick="logout()">🚪</button>
+</nav>
 
-  <input type="text" placeholder="Seu nome"><br>
-  <input type="text" placeholder="Seu WhatsApp"><br>
+<script type="module">
 
-  <a href="https://wa.me/5583996235442" class="botao">QUERO FAZER PARTE</a>
-</section>
+// CONFIG FIREBASE (VOCÊ VAI SUBSTITUIR)
+const firebaseConfig = {
+  apiKey: "SUA_API_KEY",
+  authDomain: "SEU_DOMINIO",
+  projectId: "SEU_PROJECT_ID",
+  storageBucket: "SEU_BUCKET",
+  messagingSenderId: "SEU_ID",
+  appId: "SEU_APP_ID"
+};
 
-<footer>
-  <p>© 2026 LINCOLN SLB AI - Todos os direitos reservados</p>
-</footer>
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import {
+  getAuth, createUserWithEmailAndPassword,
+  signInWithEmailAndPassword, signOut
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+import {
+  getFirestore, addDoc, collection, getDocs, query, where
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+let userAtual = null;
+
+// CADASTRO
+window.cadastrar = async () => {
+  let email = document.getElementById("email").value;
+  let senha = document.getElementById("senha").value;
+
+  await createUserWithEmailAndPassword(auth, email, senha);
+  alert("Conta criada!");
+};
+
+// LOGIN
+window.login = async () => {
+  let email = document.getElementById("email").value;
+  let senha = document.getElementById("senha").value;
+
+  let res = await signInWithEmailAndPassword(auth, email, senha);
+  userAtual = res.user;
+
+  document.getElementById("login").classList.add("hidden");
+  document.getElementById("painel").classList.remove("hidden");
+  document.getElementById("menu").classList.remove("hidden");
+
+  carregarLeads();
+};
+
+// LOGOUT
+window.logout = async () => {
+  await signOut(auth);
+  location.reload();
+};
+
+// CAPTURA
+window.abrirCaptura = () => {
+  document.getElementById("captura").classList.remove("hidden");
+  document.getElementById("crm").classList.add("hidden");
+};
+
+// SALVAR LEAD
+window.salvarLead = async () => {
+  let lead = {
+    nome: document.getElementById("nome").value,
+    telefone: document.getElementById("telefone").value,
+    email: document.getElementById("emailLead").value,
+    user: userAtual.uid,
+    data: new Date()
+  };
+
+  await addDoc(collection(db, "leads"), lead);
+
+  // WHATSAPP
+  let msg = `Novo Lead 🚀%0A${lead.nome}%0A${lead.telefone}`;
+  window.open(`https://wa.me/5583996235442?text=${msg}`);
+
+  alert("Lead salvo!");
+  carregarLeads();
+};
+
+// CRM
+window.mostrarCRM = async () => {
+  document.getElementById("crm").classList.remove("hidden");
+  document.getElementById("captura").classList.add("hidden");
+
+  let q = query(collection(db, "leads"), where("user", "==", userAtual.uid));
+  let snapshot = await getDocs(q);
+
+  let lista = document.getElementById("lista");
+  lista.innerHTML = "";
+
+  snapshot.forEach(doc => {
+    let l = doc.data();
+
+    lista.innerHTML += `
+      <div class="card">
+        <strong>${l.nome}</strong><br>
+        ${l.telefone}<br>
+        ${l.email}
+      </div>
+    `;
+  });
+
+  document.getElementById("totalLeads").innerText = snapshot.size;
+};
+
+window.mostrarPainel = () => {
+  document.getElementById("crm").classList.add("hidden");
+  document.getElementById("captura").classList.add("hidden");
+};
+
+// CARREGAR
+async function carregarLeads(){
+  window.mostrarCRM();
+}
+
+</script>
 
 </body>
 </html>
