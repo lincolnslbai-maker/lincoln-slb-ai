@@ -3,15 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LINCOLN SLB AI - Ecossistema Real</title>
+<title>LOGOMARCA OFICIAL</title>
 <style>
-/* Reset e base */
 * { box-sizing: border-box; margin:0; padding:0; font-family: Arial, sans-serif; }
-body { background:#020617; color:#fff; text-align:center; line-height:1.5; }
+body { background:#020617; color:#fff; text-align:center; line-height:1.5; overflow-x:hidden; }
 
 /* Seções */
-section { padding:40px 15px; max-width:700px; margin:auto; display:none; }
-section.active { display:block; }
+section { padding:40px 15px; max-width:700px; margin:auto; display:none; position:relative; }
+section.active { display:block; animation: fadeIn 0.5s; }
 
 /* Logo */
 .logo { font-size:26px; font-weight:bold; margin-bottom:20px; color:#22c55e; }
@@ -21,9 +20,9 @@ nav { display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-bot
 nav button { padding:10px 15px; font-size:14px; border-radius:6px; border:none; background:#0f172a; color:#fff; cursor:pointer; transition:0.3s; }
 nav button:hover { background:#22c55e; color:#020617; }
 
-/* Cabeçalhos e parágrafos */
-h1,h2 { margin-bottom:15px; }
-p { color:#94a3b8; margin-bottom:20px; }
+/* Cabeçalhos principais com rotação e largura 40% */
+h1.rotated { width:40%; margin:20px auto; writing-mode: vertical-rl; text-orientation: mixed; font-size:24px; line-height:1.2; }
+p.rotated { width:40%; margin:10px auto; writing-mode: vertical-rl; text-orientation: mixed; font-size:14px; color:#94a3b8; }
 
 /* Botões principais */
 button.main { padding:15px; background:#22c55e; border:none; border-radius:8px; font-weight:bold; width:100%; margin:10px 0; cursor:pointer; transition:0.3s; }
@@ -42,27 +41,36 @@ input { width:100%; padding:12px; margin:8px 0; border:none; border-radius:5px; 
 .modal-content h3 { margin-bottom:15px; }
 .close { position:absolute; top:10px; right:15px; cursor:pointer; font-size:18px; font-weight:bold; }
 
-/* Footer */
-footer { font-size:12px; padding:15px; white-space:nowrap; overflow:hidden; margin-top:40px; color:#64748b; }
+/* Footer fixo + rodapé secundário */
+footer { font-size:12px; padding:15px; white-space:nowrap; overflow:hidden; margin-top:40px; color:#64748b; position:relative; z-index:1; }
+.footer-rotated { width:40%; position:fixed; bottom:0; right:0; writing-mode: vertical-rl; text-orientation: mixed; font-size:12px; color:#64748b; }
 
-/* Animações simples */
+/* Botões voltar / próxima */
+.page-nav { display:flex; justify-content:space-between; margin:20px 0; max-width:700px; margin:auto; }
+.page-nav button { padding:10px 15px; font-size:14px; border-radius:6px; border:none; background:#0f172a; color:#fff; cursor:pointer; transition:0.3s; }
+.page-nav button:hover { background:#22c55e; color:#020617; }
+
+/* Animação */
 @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
-section.active { animation: fadeIn 0.5s; }
 </style>
 </head>
 <body>
 
 <!-- HOME -->
 <section id="home" class="active">
-  <div class="logo">S + LINCOLN SLB AI</div>
+  <div class="logo">LOGOMARCA OFICIAL</div>
   <nav>
     <button onclick="mostrar('home')">Início</button>
     <button onclick="mostrar('sobre')">Sobre</button>
     <button onclick="mostrar('login')">Entrar</button>
   </nav>
-  <h1>LEGADO NÃO MORRE. ELE SE MULTIPLICA.</h1>
-  <p>Quem constrói valor permanece em tudo que impactou.</p>
+  <h1 class="rotated">LEGADO NÃO MORRE.<br>ELE SE MULTIPLICA.</h1>
+  <p class="rotated">Quem constrói valor permanece em tudo que impactou.</p>
   <button class="main" onclick="mostrar('login')">ACESSAR ECOSSISTEMA</button>
+  <div class="page-nav">
+    <button onclick="anterior()">↩️ Voltar página</button>
+    <button onclick="proximo()">↪️ Próxima página</button>
+  </div>
 </section>
 
 <!-- SOBRE -->
@@ -71,6 +79,10 @@ section.active { animation: fadeIn 0.5s; }
   <div class="card" onclick="abrirModal('modal1')">Um ecossistema digital baseado em inteligência artificial, educação e construção de legado.</div>
   <div class="card" onclick="abrirModal('modal2')">Conteúdos, IAs, treinamentos e oportunidades reais de crescimento.</div>
   <button class="main" onclick="mostrar('login')">ENTRAR AGORA</button>
+  <div class="page-nav">
+    <button onclick="anterior()">↩️ Voltar página</button>
+    <button onclick="proximo()">↪️ Próxima página</button>
+  </div>
 </section>
 
 <!-- LOGIN -->
@@ -80,6 +92,10 @@ section.active { animation: fadeIn 0.5s; }
   <input id="senha" type="password" placeholder="Senha">
   <button class="main" onclick="login()">ENTRAR</button>
   <button class="main" onclick="cadastrar()">CRIAR CONTA</button>
+  <div class="page-nav">
+    <button onclick="anterior()">↩️ Voltar página</button>
+    <button onclick="proximo()">↪️ Próxima página</button>
+  </div>
 </section>
 
 <!-- PAINEL -->
@@ -90,6 +106,10 @@ section.active { animation: fadeIn 0.5s; }
   <div class="card" onclick="abrirConteudo()">📚 Conteúdos exclusivos</div>
   <button class="main" onclick="abrirIA()">USAR IA AGORA</button>
   <button class="main" onclick="abrirConteudo()">VER CONTEÚDOS</button>
+  <div class="page-nav">
+    <button onclick="anterior()">↩️ Voltar página</button>
+    <button onclick="proximo()">↪️ Próxima página</button>
+  </div>
 </section>
 
 <!-- IA -->
@@ -100,6 +120,10 @@ section.active { animation: fadeIn 0.5s; }
   <div id="resposta" class="card"></div>
   <h3>Histórico de Perguntas</h3>
   <div id="historico"></div>
+  <div class="page-nav">
+    <button onclick="anterior()">↩️ Voltar página</button>
+    <button onclick="proximo()">↪️ Próxima página</button>
+  </div>
 </section>
 
 <!-- CONTEÚDOS -->
@@ -108,6 +132,10 @@ section.active { animation: fadeIn 0.5s; }
   <div class="card" onclick="abrirModal('modal3')">🔥 Como ganhar dinheiro com IA</div>
   <div class="card" onclick="abrirModal('modal4')">⚙️ Automação de negócios</div>
   <div class="card" onclick="abrirModal('modal5')">🚀 Criação de plataformas</div>
+  <div class="page-nav">
+    <button onclick="anterior()">↩️ Voltar página</button>
+    <button onclick="proximo()">↪️ Próxima página</button>
+  </div>
 </section>
 
 <!-- MODAIS -->
@@ -118,34 +146,37 @@ section.active { animation: fadeIn 0.5s; }
 <div id="modal5" class="modal"><div class="modal-content"><span class="close" onclick="fecharModal('modal5')">&times;</span><h3>Criação de Plataformas</h3><p>Passo a passo para criar plataformas digitais escaláveis.</p></div></div>
 
 <footer>© 2026 LINCOLN SLB AI - Todos os direitos reservados</footer>
+<div class="footer-rotated">Quem constrói valor permanece em tudo que impactou.</div>
 
 <script>
 // Navegação entre seções
+let paginas=['home','sobre','login','painel','ia','conteudo'], indice=0;
 function mostrar(id){
   document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
   document.getElementById(id).classList.add("active");
+  indice=paginas.indexOf(id);
 }
+
+// Voltar / próxima
+function anterior(){ indice=(indice-1+paginas.length)%paginas.length; mostrar(paginas[indice]); }
+function proximo(){ indice=(indice+1)%paginas.length; mostrar(paginas[indice]); }
 
 // Modais
 function abrirModal(id){ document.getElementById(id).style.display="flex"; }
 function fecharModal(id){ document.getElementById(id).style.display="none"; }
 
-// Login / Cadastro realista (localStorage)
+// Login / Cadastro
 function cadastrar(){
   let email=document.getElementById("email").value;
   let senha=document.getElementById("senha").value;
-  if(email && senha){
-    localStorage.setItem(email,senha);
-    alert("Conta criada com sucesso!");
-  } else { alert("Preencha email e senha!"); }
+  if(email && senha){ localStorage.setItem(email,senha); alert("Conta criada com sucesso!"); }
+  else alert("Preencha email e senha!");
 }
-
 function login(){
   let email=document.getElementById("email").value;
   let senha=document.getElementById("senha").value;
-  if(localStorage.getItem(email)===senha){
-    mostrar("painel");
-  } else { alert("Dados inválidos"); }
+  if(localStorage.getItem(email)===senha){ mostrar("painel"); }
+  else alert("Dados inválidos");
 }
 
 // IA
@@ -154,22 +185,17 @@ function responder(){
   let pergunta=document.getElementById("pergunta").value;
   if(!pergunta){ alert("Digite uma pergunta!"); return; }
   let resposta="Resposta estratégica: foque em automação, captação e escala com IA.";
-  
-  // Salva histórico
   let historico=JSON.parse(localStorage.getItem("historico"))||[];
-  historico.push({pergunta, resposta});
+  historico.push({pergunta,resposta});
   localStorage.setItem("historico",JSON.stringify(historico));
   mostrarHistorico();
-
   document.getElementById("resposta").innerText=resposta;
 }
-
-// Histórico persistente
 function mostrarHistorico(){
   let historico=JSON.parse(localStorage.getItem("historico"))||[];
   let container=document.getElementById("historico");
   container.innerHTML="";
-  historico.forEach(h=>{ 
+  historico.forEach(h=>{
     let div=document.createElement("div");
     div.className="card"; 
     div.innerHTML=`<strong>P:</strong> ${h.pergunta}<br><strong>R:</strong> ${h.resposta}`;
@@ -179,7 +205,6 @@ function mostrarHistorico(){
 
 // Conteúdos
 function abrirConteudo(){ mostrar("conteudo"); }
-
 </script>
 </body>
 </html>
