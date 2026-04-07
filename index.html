@@ -33,7 +33,6 @@ nav {
   justify-content:center;
   gap:10px;
   flex-wrap:wrap;
-  margin-bottom:20px;
 }
 
 nav button {
@@ -45,7 +44,8 @@ nav button {
   color:#fff;
 }
 
-h1 { font-size:26px; }
+h1 { font-size:24px; }
+
 p { color:#94a3b8; }
 
 button.main {
@@ -55,85 +55,116 @@ button.main {
   border-radius:8px;
   font-weight:bold;
   width:100%;
-  max-width:300px;
-  margin:15px auto;
+  margin:10px 0;
 }
 
 .card {
   background:#0f172a;
   padding:15px;
-  margin:10px auto;
+  margin:10px 0;
   border-radius:10px;
 }
-
-.hidden { display:none; }
 
 input {
   width:100%;
   padding:10px;
   margin:5px 0;
-  border-radius:5px;
   border:none;
+  border-radius:5px;
 }
+
+.hidden { display:none; }
 
 footer {
   font-size:12px;
   padding:15px;
   white-space:nowrap;
   overflow:hidden;
-  text-overflow:ellipsis;
 }
 </style>
 </head>
 
 <body>
 
-<section>
+<!-- HOME -->
+<section id="home">
 
-  <!-- LOGO -->
   <div class="logo">S + LINCOLN SLB AI</div>
 
-  <!-- MENU ORGANIZADO -->
   <nav>
-    <button>Início</button>
-    <button>Sobre</button>
-    <button>Ecossistema</button>
-    <button>Contato</button>
+    <button onclick="mostrar('home')">Início</button>
+    <button onclick="mostrar('sobre')">Sobre</button>
+    <button onclick="mostrar('login')">Entrar</button>
   </nav>
 
-  <!-- HEADLINE -->
   <h1>LEGADO NÃO MORRE. ELE SE MULTIPLICA.</h1>
   <p>Quem constrói valor permanece em tudo que impactou.</p>
 
-  <button class="main" onclick="abrirCaptura()">ACESSAR ECOSSISTEMA</button>
+  <button class="main" onclick="mostrar('login')">ACESSAR ECOSSISTEMA</button>
 
 </section>
 
-<section>
-
+<!-- SOBRE -->
+<section id="sobre" class="hidden">
   <h2>O QUE É O PROJETO</h2>
 
   <div class="card">
-    Um ecossistema digital baseado em inteligência artificial, educação e construção de legado. Criado para impactar pessoas e gerar transformação real.
+    Um ecossistema digital baseado em inteligência artificial, educação e construção de legado.
   </div>
 
   <div class="card">
-    Área estratégica com conteúdos, IAs, treinamentos e oportunidades de crescimento.
+    Conteúdos, IAs, treinamentos e oportunidades reais de crescimento.
   </div>
 
-  <button class="main" onclick="abrirCaptura()">ENTRAR AGORA</button>
+  <button class="main" onclick="mostrar('login')">ENTRAR AGORA</button>
+</section>
+
+<!-- LOGIN -->
+<section id="login" class="hidden">
+
+  <h2>🔐 Área de Acesso</h2>
+
+  <input id="email" placeholder="Email">
+  <input id="senha" type="password" placeholder="Senha">
+
+  <button class="main" onclick="login()">ENTRAR</button>
+  <button class="main" onclick="cadastrar()">CRIAR CONTA</button>
 
 </section>
 
-<section id="captura" class="hidden">
+<!-- PAINEL -->
+<section id="painel" class="hidden">
 
-  <h2>FAÇA PARTE</h2>
+  <h2>📊 Área de Membros</h2>
 
-  <input id="nome" placeholder="Seu nome">
-  <input id="telefone" placeholder="Seu WhatsApp">
-  <input id="email" placeholder="Seu email">
+  <div class="card">👤 Bem-vindo ao ecossistema</div>
+  <div class="card">🤖 IA disponível</div>
+  <div class="card">📚 Conteúdos exclusivos</div>
 
-  <button class="main" onclick="enviar()">QUERO FAZER PARTE</button>
+  <button class="main" onclick="abrirIA()">USAR IA AGORA</button>
+  <button class="main" onclick="abrirConteudo()">VER CONTEÚDOS</button>
+
+</section>
+
+<!-- IA -->
+<section id="ia" class="hidden">
+  <h2>🤖 IA LINCOLN</h2>
+
+  <input id="pergunta" placeholder="Pergunte algo...">
+
+  <button class="main" onclick="responder()">GERAR RESPOSTA</button>
+
+  <div id="resposta" class="card"></div>
+</section>
+
+<!-- CONTEÚDOS -->
+<section id="conteudo" class="hidden">
+
+  <h2>📚 CONTEÚDOS</h2>
+
+  <div class="card">🔥 Como ganhar dinheiro com IA</div>
+  <div class="card">⚙️ Automação de negócios</div>
+  <div class="card">🚀 Criação de plataformas</div>
 
 </section>
 
@@ -143,17 +174,47 @@ footer {
 
 <script>
 
-// ABRIR CAPTURA
-function abrirCaptura(){
-  document.getElementById("captura").classList.remove("hidden");
-  window.scrollTo(0,document.body.scrollHeight);
+// NAVEGAÇÃO
+function mostrar(id){
+  document.querySelectorAll("section").forEach(s=>s.classList.add("hidden"));
+  document.getElementById(id).classList.remove("hidden");
 }
 
-// ENVIO WHATSAPP
-function enviar(){
-  let nome = document.getElementById("nome").value;
-  let msg = `Quero fazer parte 🚀%0A${nome}`;
-  window.location.href = `https://wa.me/5583996235442?text=${msg}`;
+// LOGIN SIMPLES
+function cadastrar(){
+  let email = document.getElementById("email").value;
+  let senha = document.getElementById("senha").value;
+
+  localStorage.setItem(email, senha);
+  alert("Conta criada!");
+}
+
+function login(){
+  let email = document.getElementById("email").value;
+  let senha = document.getElementById("senha").value;
+
+  if(localStorage.getItem(email) === senha){
+    mostrar("painel");
+  } else {
+    alert("Dados inválidos");
+  }
+}
+
+// IA SIMULADA
+function abrirIA(){
+  mostrar("ia");
+}
+
+function responder(){
+  let pergunta = document.getElementById("pergunta").value;
+
+  document.getElementById("resposta").innerHTML =
+  "Resposta estratégica: foque em automação, captação e escala com IA.";
+}
+
+// CONTEÚDO
+function abrirConteudo(){
+  mostrar("conteudo");
 }
 
 </script>
