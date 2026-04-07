@@ -3,32 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LOGOMARCA OFICIAL - LINCOLN SLB AI</title>
+<title>LINCOLN SLB - AI</title>
 <style>
-* { box-sizing:border-box; margin:0; padding:0; font-family:Arial,sans-serif; }
-body { background:#020617; color:#fff; text-align:center; min-height:100vh; display:flex; flex-direction:column; }
-header, footer { background:#0f172a; padding:10px; width:100%; text-align:center; position:relative; }
-.logo { font-size:22px; font-weight:bold; margin-bottom:20px; }
-nav { display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:20px; }
-nav button { padding:8px 12px; font-size:12px; border-radius:6px; border:none; background:#0f172a; color:#fff; cursor:pointer; }
+/* RESET & GERAL */
+* { box-sizing:border-box; margin:0; padding:0; font-family:'Arial Black', Arial, sans-serif; color:#FFD700; }
+body { background:#020617; min-height:100vh; display:flex; flex-direction:column; text-align:center; }
+header, footer { width:100%; text-align:center; position:relative; }
 section { padding:20px; max-width:600px; margin:auto; flex:1; }
-h1 { font-size:2rem; margin-bottom:10px; line-height:1.3; }
-p { color:#94a3b8; margin-bottom:20px; }
-button.main { padding:12px 20px; background:#22c55e; border:none; border-radius:8px; font-weight:bold; width:100%; margin:10px 0; cursor:pointer; }
+h1, h2, h3, p { color:#FFD700; font-weight:bold; }
+button.main { padding:12px 20px; background:#0f172a; border:none; border-radius:8px; font-weight:bold; width:100%; margin:10px 0; cursor:pointer; color:#FFD700; font-family:'Arial Black', Arial; font-size:16px; }
+button:hover { background:#1e293b; }
 .card { background:#0f172a; padding:15px; margin:10px 0; border-radius:10px; cursor:pointer; transition:0.3s; }
 .card:hover { background:#1e293b; transform:scale(1.02); }
-input { width:100%; padding:10px; margin:5px 0; border:none; border-radius:5px; }
+input { width:100%; padding:10px; margin:5px 0; border:none; border-radius:5px; background:#020617; color:#FFD700; font-family:'Arial Black', Arial; }
 .hidden { display:none; }
+nav { display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:20px; }
+nav button { font-size:14px; padding:8px 12px; background:#0f172a; border:none; border-radius:6px; cursor:pointer; color:#FFD700; font-family:'Arial Black', Arial; }
 .page-nav { display:flex; justify-content:space-between; margin-top:15px; }
 .page-nav button { width:48%; }
-footer p { font-size:12px; }
-.h-40 { height:40vh; display:flex; flex-direction:column; justify-content:center; }
+.logo-container { margin-bottom:20px; }
+.logo { font-size:2.5rem; width:70%; margin:auto; }
+.subtitle { font-size:1rem; width:30%; margin:auto; margin-top:5px; }
+
+/* RODAPÉ LUXO */
+.footer-banner { background:#1c2a4a; padding:15px; }
+footer p { font-size:12px; margin-top:5px; }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">LOGOMARCA OFICIAL - LINCOLN SLB AI</div>
+  <div class="logo-container">
+    <div class="logo">LINCOLN SLB - AI</div>
+    <div class="subtitle">ECOSSISTEMA LINCOLN SLB - AI</div>
+  </div>
   <nav>
     <button onclick="mostrar('home')">Início</button>
     <button onclick="mostrar('sobre')">Sobre</button>
@@ -37,11 +45,9 @@ footer p { font-size:12px; }
 </header>
 
 <section id="home">
-  <div class="h-40">
-    <h1>LEGADO NÃO MORRE.<br>ELE SE MULTIPLICA.</h1>
-    <p>Quem constrói valor permanece em tudo que impactou.</p>
-    <button class="main" onclick="mostrar('login')">ACESSAR ECOSSISTEMA</button>
-  </div>
+  <h1>LEGADO NÃO MORRE.<br>ELE SE MULTIPLICA.</h1>
+  <p>Quem constrói valor permanece em tudo que impactou.</p>
+  <button class="main" onclick="mostrar('login')">ACESSAR ECOSSISTEMA</button>
 </section>
 
 <section id="sobre" class="hidden">
@@ -100,17 +106,19 @@ footer p { font-size:12px; }
   </div>
 </section>
 
-<footer>
-  <p>© 2026 LINCOLN SLB AI - Todos os direitos reservados</p>
+<div class="footer-banner">
   <p>Quem constrói valor permanece em tudo que impactou.</p>
-</footer>
+  <p>© 2026 LINCOLN SLB AI - Todos os direitos reservados</p>
+</div>
 
 <script>
+// NAVEGAÇÃO
 function mostrar(id){
   document.querySelectorAll("section").forEach(s=>s.classList.add("hidden"));
   document.getElementById(id).classList.remove("hidden");
 }
 
+// LOGIN/CADASTRO
 function cadastrar(){
   let email = document.getElementById("email").value;
   let senha = document.getElementById("senha").value;
@@ -128,6 +136,7 @@ function login(){
   } else alert("Dados inválidos");
 }
 
+// IA
 function abrirIA(){ mostrar("ia"); }
 function abrirConteudo(){ mostrar("conteudo"); }
 
@@ -137,7 +146,6 @@ function responder(){
     const respostaTexto = `Resposta estratégica: foque em automação, captação e escala com IA.`;
     const respostaDiv = document.getElementById("resposta");
     respostaDiv.innerHTML = `<strong>P:</strong> ${pergunta}<br><strong>R:</strong> ${respostaTexto}`;
-    // histórico persistente
     let hist = JSON.parse(localStorage.getItem("histPerguntas") || "[]");
     hist.push({pergunta, resposta:respostaTexto});
     localStorage.setItem("histPerguntas", JSON.stringify(hist));
