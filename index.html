@@ -3,33 +3,78 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>S + LINCOLN SLB AI</title>
-<link rel="stylesheet" href="style.css">
+<title>LINCOLN SLB AI - Ecossistema Real</title>
+<style>
+/* Reset e base */
+* { box-sizing: border-box; margin:0; padding:0; font-family: Arial, sans-serif; }
+body { background:#020617; color:#fff; text-align:center; line-height:1.5; }
+
+/* Seções */
+section { padding:40px 15px; max-width:700px; margin:auto; display:none; }
+section.active { display:block; }
+
+/* Logo */
+.logo { font-size:26px; font-weight:bold; margin-bottom:20px; color:#22c55e; }
+
+/* Navegação */
+nav { display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:20px; }
+nav button { padding:10px 15px; font-size:14px; border-radius:6px; border:none; background:#0f172a; color:#fff; cursor:pointer; transition:0.3s; }
+nav button:hover { background:#22c55e; color:#020617; }
+
+/* Cabeçalhos e parágrafos */
+h1,h2 { margin-bottom:15px; }
+p { color:#94a3b8; margin-bottom:20px; }
+
+/* Botões principais */
+button.main { padding:15px; background:#22c55e; border:none; border-radius:8px; font-weight:bold; width:100%; margin:10px 0; cursor:pointer; transition:0.3s; }
+button.main:hover { background:#16a34a; }
+
+/* Cards */
+.card { background:#0f172a; padding:15px; margin:10px 0; border-radius:10px; cursor:pointer; transition:0.3s; }
+.card:hover { background:#1e293b; }
+
+/* Inputs */
+input { width:100%; padding:12px; margin:8px 0; border:none; border-radius:5px; }
+
+/* Modais */
+.modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); justify-content:center; align-items:center; }
+.modal-content { background:#0f172a; padding:25px; border-radius:12px; max-width:500px; text-align:left; position:relative; }
+.modal-content h3 { margin-bottom:15px; }
+.close { position:absolute; top:10px; right:15px; cursor:pointer; font-size:18px; font-weight:bold; }
+
+/* Footer */
+footer { font-size:12px; padding:15px; white-space:nowrap; overflow:hidden; margin-top:40px; color:#64748b; }
+
+/* Animações simples */
+@keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+section.active { animation: fadeIn 0.5s; }
+</style>
 </head>
 <body>
 
-<section id="home">
+<!-- HOME -->
+<section id="home" class="active">
   <div class="logo">S + LINCOLN SLB AI</div>
-
   <nav>
     <button onclick="mostrar('home')">Início</button>
     <button onclick="mostrar('sobre')">Sobre</button>
     <button onclick="mostrar('login')">Entrar</button>
   </nav>
-
   <h1>LEGADO NÃO MORRE. ELE SE MULTIPLICA.</h1>
   <p>Quem constrói valor permanece em tudo que impactou.</p>
   <button class="main" onclick="mostrar('login')">ACESSAR ECOSSISTEMA</button>
 </section>
 
-<section id="sobre" class="hidden">
+<!-- SOBRE -->
+<section id="sobre">
   <h2>O QUE É O PROJETO</h2>
-  <div class="card">Um ecossistema digital baseado em inteligência artificial, educação e construção de legado.</div>
-  <div class="card">Conteúdos, IAs, treinamentos e oportunidades reais de crescimento.</div>
+  <div class="card" onclick="abrirModal('modal1')">Um ecossistema digital baseado em inteligência artificial, educação e construção de legado.</div>
+  <div class="card" onclick="abrirModal('modal2')">Conteúdos, IAs, treinamentos e oportunidades reais de crescimento.</div>
   <button class="main" onclick="mostrar('login')">ENTRAR AGORA</button>
 </section>
 
-<section id="login" class="hidden">
+<!-- LOGIN -->
+<section id="login">
   <h2>🔐 Área de Acesso</h2>
   <input id="email" placeholder="Email">
   <input id="senha" type="password" placeholder="Senha">
@@ -37,31 +82,104 @@
   <button class="main" onclick="cadastrar()">CRIAR CONTA</button>
 </section>
 
-<section id="painel" class="hidden">
+<!-- PAINEL -->
+<section id="painel">
   <h2>📊 Área de Membros</h2>
-  <div id="cards-container"></div>
+  <div class="card" onclick="abrirIA()">👤 Bem-vindo ao ecossistema</div>
+  <div class="card" onclick="abrirIA()">🤖 IA disponível</div>
+  <div class="card" onclick="abrirConteudo()">📚 Conteúdos exclusivos</div>
   <button class="main" onclick="abrirIA()">USAR IA AGORA</button>
   <button class="main" onclick="abrirConteudo()">VER CONTEÚDOS</button>
 </section>
 
-<section id="ia" class="hidden">
+<!-- IA -->
+<section id="ia">
   <h2>🤖 IA LINCOLN</h2>
   <input id="pergunta" placeholder="Pergunte algo...">
   <button class="main" onclick="responder()">GERAR RESPOSTA</button>
   <div id="resposta" class="card"></div>
-  <h3>Histórico</h3>
-  <div id="historico-container"></div>
+  <h3>Histórico de Perguntas</h3>
+  <div id="historico"></div>
 </section>
 
-<section id="conteudo" class="hidden">
-  <h2>📚 CONTEÚDOS 30 DIAS</h2>
-  <div id="conteudo-container"></div>
+<!-- CONTEÚDOS -->
+<section id="conteudo">
+  <h2>📚 CONTEÚDOS</h2>
+  <div class="card" onclick="abrirModal('modal3')">🔥 Como ganhar dinheiro com IA</div>
+  <div class="card" onclick="abrirModal('modal4')">⚙️ Automação de negócios</div>
+  <div class="card" onclick="abrirModal('modal5')">🚀 Criação de plataformas</div>
 </section>
 
-<footer>
-© 2026 LINCOLN SLB AI - Todos os direitos reservados
-</footer>
+<!-- MODAIS -->
+<div id="modal1" class="modal"><div class="modal-content"><span class="close" onclick="fecharModal('modal1')">&times;</span><h3>Sobre o Ecossistema</h3><p>Um ecossistema digital completo, educacional e prático para profissionais e empresas.</p></div></div>
+<div id="modal2" class="modal"><div class="modal-content"><span class="close" onclick="fecharModal('modal2')">&times;</span><h3>Oportunidades Reais</h3><p>Treinamentos, conteúdos e oportunidades que geram resultado real.</p></div></div>
+<div id="modal3" class="modal"><div class="modal-content"><span class="close" onclick="fecharModal('modal3')">&times;</span><h3>Como ganhar dinheiro com IA</h3><p>Exemplos práticos e estratégias para monetizar inteligência artificial no seu negócio.</p></div></div>
+<div id="modal4" class="modal"><div class="modal-content"><span class="close" onclick="fecharModal('modal4')">&times;</span><h3>Automação de Negócios</h3><p>Ferramentas e processos para automatizar rotinas e aumentar produtividade.</p></div></div>
+<div id="modal5" class="modal"><div class="modal-content"><span class="close" onclick="fecharModal('modal5')">&times;</span><h3>Criação de Plataformas</h3><p>Passo a passo para criar plataformas digitais escaláveis.</p></div></div>
 
-<script src="app.js"></script>
+<footer>© 2026 LINCOLN SLB AI - Todos os direitos reservados</footer>
+
+<script>
+// Navegação entre seções
+function mostrar(id){
+  document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+// Modais
+function abrirModal(id){ document.getElementById(id).style.display="flex"; }
+function fecharModal(id){ document.getElementById(id).style.display="none"; }
+
+// Login / Cadastro realista (localStorage)
+function cadastrar(){
+  let email=document.getElementById("email").value;
+  let senha=document.getElementById("senha").value;
+  if(email && senha){
+    localStorage.setItem(email,senha);
+    alert("Conta criada com sucesso!");
+  } else { alert("Preencha email e senha!"); }
+}
+
+function login(){
+  let email=document.getElementById("email").value;
+  let senha=document.getElementById("senha").value;
+  if(localStorage.getItem(email)===senha){
+    mostrar("painel");
+  } else { alert("Dados inválidos"); }
+}
+
+// IA
+function abrirIA(){ mostrar("ia"); mostrarHistorico(); }
+function responder(){
+  let pergunta=document.getElementById("pergunta").value;
+  if(!pergunta){ alert("Digite uma pergunta!"); return; }
+  let resposta="Resposta estratégica: foque em automação, captação e escala com IA.";
+  
+  // Salva histórico
+  let historico=JSON.parse(localStorage.getItem("historico"))||[];
+  historico.push({pergunta, resposta});
+  localStorage.setItem("historico",JSON.stringify(historico));
+  mostrarHistorico();
+
+  document.getElementById("resposta").innerText=resposta;
+}
+
+// Histórico persistente
+function mostrarHistorico(){
+  let historico=JSON.parse(localStorage.getItem("historico"))||[];
+  let container=document.getElementById("historico");
+  container.innerHTML="";
+  historico.forEach(h=>{ 
+    let div=document.createElement("div");
+    div.className="card"; 
+    div.innerHTML=`<strong>P:</strong> ${h.pergunta}<br><strong>R:</strong> ${h.resposta}`;
+    container.appendChild(div);
+  });
+}
+
+// Conteúdos
+function abrirConteudo(){ mostrar("conteudo"); }
+
+</script>
 </body>
 </html>
