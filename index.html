@@ -42,8 +42,8 @@ input { width:100%; padding:12px; margin:8px 0; border:none; border-radius:5px; 
 .close { position:absolute; top:10px; right:15px; cursor:pointer; font-size:18px; font-weight:bold; }
 
 /* Footer fixo + rodapé secundário */
-footer { font-size:12px; padding:15px; white-space:nowrap; overflow:hidden; margin-top:40px; color:#64748b; position:relative; z-index:1; }
-.footer-bottom { width:40vw; margin:20px auto; font-size:12px; color:#64748b; }
+.footer-top { width:40vw; margin:10px auto; font-size:12px; color:#64748b; }
+footer { font-size:12px; padding:15px; white-space:nowrap; overflow:hidden; margin-top:40px; color:#64748b; }
 
 /* Botões voltar / próxima */
 .page-nav { display:flex; justify-content:space-between; margin:20px 0; max-width:700px; margin:auto; }
@@ -55,7 +55,7 @@ footer { font-size:12px; padding:15px; white-space:nowrap; overflow:hidden; marg
 
 /* Responsividade geral */
 @media (max-width:600px){
-  h1.main-text, p.sub-text, .footer-bottom { width:80vw; }
+  h1.main-text, p.sub-text, .footer-top { width:80vw; }
 }
 </style>
 </head>
@@ -72,10 +72,6 @@ footer { font-size:12px; padding:15px; white-space:nowrap; overflow:hidden; marg
   <h1 class="main-text">LEGADO NÃO MORRE.<br>ELE SE MULTIPLICA.</h1>
   <p class="sub-text">Quem constrói valor permanece em tudo que impactou.</p>
   <button class="main" onclick="mostrar('login')">ACESSAR ECOSSISTEMA</button>
-  <div class="page-nav">
-    <button onclick="anterior()">↩️ Voltar página</button>
-    <button onclick="proximo()">↪️ Próxima página</button>
-  </div>
 </section>
 
 <!-- SOBRE -->
@@ -150,8 +146,9 @@ footer { font-size:12px; padding:15px; white-space:nowrap; overflow:hidden; marg
 <div id="modal4" class="modal"><div class="modal-content"><span class="close" onclick="fecharModal('modal4')">&times;</span><h3>Automação de Negócios</h3><p>Ferramentas e processos para automatizar rotinas e aumentar produtividade.</p></div></div>
 <div id="modal5" class="modal"><div class="modal-content"><span class="close" onclick="fecharModal('modal5')">&times;</span><h3>Criação de Plataformas</h3><p>Passo a passo para criar plataformas digitais escaláveis.</p></div></div>
 
+<!-- Rodapé -->
+<div class="footer-top">Quem constrói valor permanece em tudo que impactou.</div>
 <footer>© 2026 LINCOLN SLB AI - Todos os direitos reservados</footer>
-<div class="footer-bottom">Quem constrói valor permanece em tudo que impactou.</div>
 
 <script>
 // Navegação entre seções
