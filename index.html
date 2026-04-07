@@ -6,6 +6,8 @@
 <title>LINCOLN SLB AI</title>
 
 <style>
+* { box-sizing:border-box; }
+
 body {
   margin:0;
   font-family:Arial;
@@ -14,12 +16,39 @@ body {
   text-align:center;
 }
 
-section { padding:40px 20px; }
+section {
+  padding:40px 15px;
+  max-width:500px;
+  margin:auto;
+}
 
-h1 { font-size:28px; }
+.logo {
+  font-size:22px;
+  font-weight:bold;
+  margin-bottom:20px;
+}
+
+nav {
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:20px;
+}
+
+nav button {
+  padding:8px 12px;
+  font-size:12px;
+  border-radius:6px;
+  border:none;
+  background:#0f172a;
+  color:#fff;
+}
+
+h1 { font-size:26px; }
 p { color:#94a3b8; }
 
-button {
+button.main {
   padding:15px;
   background:#22c55e;
   border:none;
@@ -27,8 +56,7 @@ button {
   font-weight:bold;
   width:100%;
   max-width:300px;
-  margin:10px auto;
-  display:block;
+  margin:15px auto;
 }
 
 .card {
@@ -36,10 +64,7 @@ button {
   padding:15px;
   margin:10px auto;
   border-radius:10px;
-  max-width:350px;
 }
-
-.destaque { color:#22c55e; }
 
 .hidden { display:none; }
 
@@ -50,83 +75,84 @@ input {
   border-radius:5px;
   border:none;
 }
+
+footer {
+  font-size:12px;
+  padding:15px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
 </style>
 </head>
 
 <body>
 
-<!-- HERO -->
 <section>
-  <h1>🚀 Transforme IA em <span class="destaque">DINHEIRO AUTOMÁTICO</span></h1>
-  <p>Crie sistemas que capturam leads e vendem todos os dias sem precisar programar.</p>
 
-  <button onclick="abrirCaptura()">QUERO ACESSO AGORA</button>
+  <!-- LOGO -->
+  <div class="logo">S + LINCOLN SLB AI</div>
+
+  <!-- MENU ORGANIZADO -->
+  <nav>
+    <button>Início</button>
+    <button>Sobre</button>
+    <button>Ecossistema</button>
+    <button>Contato</button>
+  </nav>
+
+  <!-- HEADLINE -->
+  <h1>LEGADO NÃO MORRE. ELE SE MULTIPLICA.</h1>
+  <p>Quem constrói valor permanece em tudo que impactou.</p>
+
+  <button class="main" onclick="abrirCaptura()">ACESSAR ECOSSISTEMA</button>
+
 </section>
 
-<!-- PROVA -->
 <section>
-  <div class="card">🔥 Mais de 1.000 leads gerados automaticamente</div>
-  <div class="card">💰 Pessoas faturando com IA todos os dias</div>
-  <div class="card">⚙️ Sistema pronto em minutos</div>
-</section>
 
-<!-- BENEFÍCIOS -->
-<section>
-  <div class="card">✔ Gere renda com IA</div>
-  <div class="card">✔ Automatize seu negócio</div>
-  <div class="card">✔ Crie plataformas lucrativas</div>
-</section>
-
-<!-- OFERTA -->
-<section>
-  <h2>💰 Escolha seu plano</h2>
+  <h2>O QUE É O PROJETO</h2>
 
   <div class="card">
-    <strong>FREE</strong><br>
-    Acesso limitado<br>
-    R$ 0
+    Um ecossistema digital baseado em inteligência artificial, educação e construção de legado. Criado para impactar pessoas e gerar transformação real.
   </div>
 
   <div class="card">
-    <strong>PRO</strong><br>
-    Leads ilimitados + automação<br>
-    R$ 29/mês
-    <button onclick="comprar()">QUERO SER PRO</button>
+    Área estratégica com conteúdos, IAs, treinamentos e oportunidades de crescimento.
   </div>
 
-  <p>⚠️ Vagas limitadas hoje</p>
+  <button class="main" onclick="abrirCaptura()">ENTRAR AGORA</button>
+
 </section>
 
-<!-- CAPTURA -->
 <section id="captura" class="hidden">
-  <h2>🔥 Entre agora</h2>
+
+  <h2>FAÇA PARTE</h2>
 
   <input id="nome" placeholder="Seu nome">
-  <input id="telefone" placeholder="WhatsApp">
-  <input id="email" placeholder="Email">
+  <input id="telefone" placeholder="Seu WhatsApp">
+  <input id="email" placeholder="Seu email">
 
-  <button onclick="enviar()">CONTINUAR</button>
+  <button class="main" onclick="enviar()">QUERO FAZER PARTE</button>
+
 </section>
+
+<footer>
+© 2026 LINCOLN SLB AI - Todos os direitos reservados
+</footer>
 
 <script>
 
 // ABRIR CAPTURA
 function abrirCaptura(){
   document.getElementById("captura").classList.remove("hidden");
+  window.scrollTo(0,document.body.scrollHeight);
 }
 
-// ENVIO
+// ENVIO WHATSAPP
 function enviar(){
   let nome = document.getElementById("nome").value;
-  let telefone = document.getElementById("telefone").value;
-
-  let msg = `Quero acesso 🚀%0A${nome}`;
-  window.location.href = `https://wa.me/5583996235442?text=${msg}`;
-}
-
-// COMPRA
-function comprar(){
-  let msg = "Quero plano PRO 🚀";
+  let msg = `Quero fazer parte 🚀%0A${nome}`;
   window.location.href = `https://wa.me/5583996235442?text=${msg}`;
 }
 
